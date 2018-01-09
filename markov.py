@@ -59,7 +59,9 @@ def make_text(chains):
 
     words = []
 
-    # your code goes here
+    while len(words) < 4:
+        current_char = choice(chains)
+        words.append(current_char)
 
     return " ".join(words)
 
