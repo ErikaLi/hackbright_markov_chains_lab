@@ -58,14 +58,21 @@ def make_text(chains):
     """Return text from chains."""
 
     words = []
+    # picking out random keys from a list of keys(from chains (tuples))
     pairs = chains.keys()
     random_key = choice(pairs)
+    #push the first random key into words, use that in the loop
     words.extend(list(random_key))
 
+    # loop until we cannot find a next word for the current key
     while chains.get(random_key) is not None:
+        # find a list of possible next words of the current key
         possible_next_status = chains.get(random_key)
+        # pick a word randomly from that list as our next word
         random_status = choice(possible_next_status)
+        # append that word into our words list
         words.append(random_status)
+        # rebind the current key to be the last word of the key and the next word
         random_key = (words[-2], words[-1])
 
     return " ".join(words)
