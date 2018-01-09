@@ -58,10 +58,15 @@ def make_text(chains):
     """Return text from chains."""
 
     words = []
+    pairs = chains.keys()
+    random_key = choice(pairs)
+    words.extend(list(random_key))
 
-    while len(words) < 4:
-        current_char = choice(chains)
-        words.append(current_char)
+    while chains.get(random_key) is not None:
+        possible_next_status = chains.get(random_key)
+        random_status = choice(possible_next_status)
+        words.append(random_status)
+        random_key = (words[-2], words[-1])
 
     return " ".join(words)
 
