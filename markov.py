@@ -15,6 +15,8 @@ def open_and_read_file(file_path):
     text = open(file_path)
     data = text.read()
     data = data.replace("\n", " ")
+    data = data.replace(" -- ","")
+    data = data.replace("  "," ")
 
     return data
 
@@ -90,6 +92,7 @@ def capitalise_punctuate(chains):
     # picking out random keys from a list of keys(from chains (tuples))
     ngrams = chains.keys()# lists
     # ref : https://stackoverflow.com/questions/7100243/finding-in-elements-in-a-tuple-and-filtering-them
+
     capitalised_ngrams = [ngram for ngram in ngrams if ngram[0][0] == ngram[0][0].upper()]
     random_key = choice(capitalised_ngrams)#tuple
     #key_length = len(random_key)
