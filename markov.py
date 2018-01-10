@@ -115,7 +115,8 @@ def capitalise_punctuate(chains):
 
     return " ".join(words)
 
-def check_characters(file_path):
+def cast(file_path):
+    """Parse the file into dictionary with characters as keys and string of their lines as values"""
 
     characters = []
     all_dialogue = []
@@ -132,12 +133,23 @@ def check_characters(file_path):
             character = parts[0]
             line = parts[1]
             cast[character] = cast.get(character, "") + line
+    return cast
+
+def character_markov(cast):
+    """return a dictionary with characters as keys and markov chains of their lines as values"""
 
 
 
 def character_chains(input_path):
-    """ creates dictionaries with keys as characters and value as a list of next character"""
+    """Return a dictionary with characters as keys and possible next characters as values"""
 
+def make_play(character_chains, chains):
+    """return a play that mimick the style of the original play"""
+
+    # pick a random character
+    # using chains to create a new line for that character
+    # choose a next character randomly using charater chain
+    # create some restriction to end the loop
 
 
 
