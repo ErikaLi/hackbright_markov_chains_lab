@@ -115,11 +115,38 @@ def capitalise_punctuate(chains):
 
     return " ".join(words)
 
+def check_characters(file_path):
+
+    characters = []
+    all_dialogue = []
+    cast = {}
+    text = open(file_path)
+    data = text.read()
+    data = data.replace(" -- ","")
+    data = data.replace("  "," ")
+    all_dialogues = data.split("\n")
+
+    for dialogue in all_dialogues:
+        if dialogue != "":
+            parts = dialogue.split(":")
+            character = parts[0]
+            line = parts[1]
+            cast[character] = cast.get(character, "") + line
+
+
+
+def character_chains(input_path):
+    """ creates dictionaries with keys as characters and value as a list of next character"""
+
+
+
 
 input_path = sys.argv[1]
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
+
+#rint input_text
 
 # Get a Markov chain
 chains = make_chains(input_text, 4)
@@ -128,6 +155,8 @@ chains = make_chains(input_text, 4)
 random_text = make_text(chains)
 
 # run capitalise and punctuate
-print capitalise_punctuate(chains)
+#print capitalise_punctuate(chains)
 
-# print random_text
+#print random_text
+
+check_characters(input_path)
