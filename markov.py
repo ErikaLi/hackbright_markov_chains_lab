@@ -2,6 +2,7 @@
 
 from random import choice
 from string import punctuation
+import sys
 
 
 def open_and_read_file(file_path):
@@ -113,7 +114,7 @@ def capitalise_punctuate(chains):
     return " ".join(words)
 
 
-input_path = "green-eggs.txt"
+input_path = sys.argv[1]
 
 # Open the file and turn it into one long string
 input_text = open_and_read_file(input_path)
