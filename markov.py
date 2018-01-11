@@ -59,7 +59,6 @@ def make_chains(text_string, n):
     return chains
 
 
-
 def make_text(chains):
     """Return text from chains."""
 
@@ -116,23 +115,28 @@ def capitalise_punctuate(chains):
 
     return " ".join(words)
 
+
 def limit_chars(max_length):
     tweets = ""
     while len(tweets) <= max_length:
         new_tweet = tweets + " " + capitalise_punctuate(chains)
         if len(new_tweet) > max_length:
             return tweets
-        tweets += capitalise_punctuate(chains)
+        tweets = tweets + " " + capitalise_punctuate(chains)
 
     return tweets
 
 
 
-
 def retweet():
+    feed = markovtweets.update(limit_chars(140))
     decision = raw_input("Enter to tweet again [q to quit] >")
     if decision == "":
         feed = markovtweets.update(limit_chars(140))
+        decision = raw_input("Enter to tweet again [q to quit] >")
+    else:
+        print "thanks for tweeting"
+
 
 
 # def cast(file_path):

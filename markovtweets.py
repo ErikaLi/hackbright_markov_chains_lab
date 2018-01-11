@@ -15,4 +15,5 @@ api = twitter.Api(
 #print status.text
 
 def update(string):
-    api.PostUpdate(string)
+    status = api.PostUpdate(string)
+    print status.text
