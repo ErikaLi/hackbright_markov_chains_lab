@@ -3,6 +3,7 @@
 from random import choice
 from string import punctuation
 import sys
+import markovtweets
 
 
 def open_and_read_file(file_path):
@@ -115,36 +116,55 @@ def capitalise_punctuate(chains):
 
     return " ".join(words)
 
-def cast(file_path):
-    """Parse the file into dictionary with characters as keys and string of their lines as values"""
+def limit_chars(max_length):
+    tweets = ""
+    while len(tweets) <= max_length:
+        new_tweet = tweets + " " + capitalise_punctuate(chains)
+        if len(new_tweet) > max_length:
+            return tweets
+        tweets += capitalise_punctuate(chains)
 
-    characters = []
-    all_dialogue = []
-    cast = {}
-    text = open(file_path)
-    data = text.read()
-    data = data.replace(" -- ","")
-    data = data.replace("  "," ")
-    all_dialogues = data.split("\n")
-
-    for dialogue in all_dialogues:
-        if dialogue != "":
-            parts = dialogue.split(":")
-            character = parts[0]
-            line = parts[1]
-            cast[character] = cast.get(character, "") + line
-    return cast
-
-def character_markov(cast):
-    """return a dictionary with characters as keys and markov chains of their lines as values"""
+    return tweets
 
 
 
-def character_chains(input_path):
-    """Return a dictionary with characters as keys and possible next characters as values"""
 
-def make_play(character_chains, chains):
-    """return a play that mimick the style of the original play"""
+def retweet():
+    decision = raw_input("Enter to tweet again [q to quit] >")
+    if decision == "":
+        feed = markovtweets.update(limit_chars(140))
+
+
+# def cast(file_path):
+#     """Parse the file into dictionary with characters as keys and string of their lines as values"""
+
+#     characters = []
+#     all_dialogue = []
+#     cast = {}
+#     text = open(file_path)
+#     data = text.read()
+#     data = data.replace(" -- ","")
+#     data = data.replace("  "," ")
+#     all_dialogues = data.split("\n")
+
+#     for dialogue in all_dialogues:
+#         if dialogue != "":
+#             parts = dialogue.split(":")
+#             character = parts[0]
+#             line = parts[1]
+#             cast[character] = cast.get(character, "") + line
+#     return cast
+
+# def character_markov(cast):
+#     """return a dictionary with characters as keys and markov chains of their lines as values"""
+
+
+
+# def character_chains(input_path):
+#     """Return a dictionary with characters as keys and possible next characters as values"""
+
+# def make_play(character_chains, chains):
+#     """return a play that mimick the style of the original play"""
 
     # pick a random character
     # using chains to create a new line for that character
@@ -166,9 +186,13 @@ chains = make_chains(input_text, 4)
 # Produce random text
 random_text = make_text(chains)
 
+retweet()
+
+limit_chars(140)
+
 # run capitalise and punctuate
 #print capitalise_punctuate(chains)
 
 #print random_text
 
-check_characters(input_path)
+# check_characters(input_path)

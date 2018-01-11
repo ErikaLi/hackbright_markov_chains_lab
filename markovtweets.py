@@ -9,7 +9,10 @@ api = twitter.Api(
     access_token_secret=os.environ['TWITTER_ACCESS_TOKEN_SECRET']
 )
 
-print api.VerifyCredentials()
+#print api.VerifyCredentials()
 
-status = api.PostUpdate("Test")
-print status.text
+#status = api.PostUpdate("Test")
+#print status.text
+
+def update(string):
+    api.PostUpdate(string)
